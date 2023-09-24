@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spectrum/enums/order_status_item_view.dart';
+import 'package:collection/collection.dart';
 
 class Enums extends StatefulWidget {
   const Enums({Key? key}) : super(key: key);
