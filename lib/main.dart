@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(
-        initialIndex: 0,
+        initialIndex: 1,
       ),
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
