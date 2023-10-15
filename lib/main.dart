@@ -1,8 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spectrum/enums/enums.dart';
-import 'package:flutter_spectrum/enums/order_tracking_enum.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Animate.restartOnHotReload = true;
   runApp(const MainApp());
 }
 
