@@ -42,4 +42,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-lib/enums/order_tracking_enum.dart
+/lib/enums/order_tracking_enum.dart
+/lib/utils/test_extensions.dart

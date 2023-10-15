@@ -15,7 +15,7 @@ class _EnumsState extends State<Enums> {
   @override
   Widget build(BuildContext context) {
     final themeColors = Theme.of(context).colorScheme;
-    MyOrder order = MyOrder.order.copyWith(status: OrderStatusEnum.delivered);
+    //MyOrder order = MyOrder.order.copyWith(status: OrderStatusEnum.delivered);
     return Scaffold(
       backgroundColor: themeColors.background,
       appBar: AppBar(
@@ -24,7 +24,7 @@ class _EnumsState extends State<Enums> {
           children: [
             const Text('Order tracking'),
             Text(
-              '#${order.orderId}',
+              '#${MyOrder.order.orderId}',
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 14,
@@ -49,7 +49,8 @@ class _EnumsState extends State<Enums> {
                   subtitle: e.description,
                   icon: e.icon,
                   showLine: i < OrderStatusEnum.values.length - 1,
-                  isActive: OrderStatusEnum.values.indexOf(order.status) >= i,
+                  isActive:
+                      OrderStatusEnum.values.indexOf(MyOrder.order.status) >= i,
                 ),
               )
               .toList(),
@@ -90,7 +91,7 @@ class MyOrder {
   MyOrder(this.orderId, this.status);
 
   static MyOrder get order {
-    return MyOrder('ORDR123', OrderStatusEnum.processing);
+    return MyOrder('ORDR123', OrderStatusEnum.packaging);
   }
 
   MyOrder copyWith({

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spectrum/enums/enums.dart';
+import 'package:flutter_spectrum/extensions/order_details_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +51,7 @@ class HomeScreen extends HookWidget {
         },
         children: const [
           Enums(),
-          Enums(),
+          OrderDetailsPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
