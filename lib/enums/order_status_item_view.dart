@@ -70,8 +70,13 @@ class OrderStatusItemView extends StatelessWidget {
               child: Card(
                 color: themeColors.surface,
                 child: ListTile(
-                  title: Text(title,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                   subtitle: Text(
                     subtitle,
                     style: const TextStyle(

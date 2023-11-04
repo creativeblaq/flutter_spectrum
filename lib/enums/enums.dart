@@ -6,6 +6,8 @@ import 'package:flutter_spectrum/enums/order_status_item_view.dart';
 
 class Enums extends StatefulWidget {
   const Enums({Key? key}) : super(key: key);
+  static const String routeName = 'enums';
+  static const String routeLocation = '/$routeName';
 
   @override
   State<Enums> createState() => _EnumsState();
@@ -54,30 +56,6 @@ class _EnumsState extends State<Enums> {
                 ),
               )
               .toList(),
-          /*  OrderStatusItemView(
-            color: OrderStatusEnum.processing.color,
-            title: OrderStatusEnum.processing.title, //'Processing',
-            subtitle: OrderStatusEnum.processing.description,
-            icon: OrderStatusEnum.processing.icon,
-            showLine: true,
-            isActive: order.status == OrderStatusEnum.processing,
-          ),
-          OrderStatusItemView(
-            color: OrderStatusEnum.inTransit.color,
-            title: OrderStatusEnum.inTransit.title, //'Processing',
-            subtitle: OrderStatusEnum.inTransit.description,
-            icon: OrderStatusEnum.inTransit.icon,
-            showLine: true,
-            isActive: order.status == OrderStatusEnum.inTransit,
-          ),
-          OrderStatusItemView(
-            color: OrderStatusEnum.delivered.color,
-            title: OrderStatusEnum.delivered.title, //'Processing',
-            subtitle: OrderStatusEnum.delivered.description,
-            icon: OrderStatusEnum.delivered.icon,
-            showLine: false,
-            isActive: order.status == OrderStatusEnum.delivered,
-          ), */
         ],
       ),
     );
@@ -88,10 +66,16 @@ class MyOrder {
   final String orderId;
   final OrderStatusEnum status;
 
-  MyOrder(this.orderId, this.status);
+  MyOrder(
+    this.orderId,
+    this.status,
+  );
 
   static MyOrder get order {
-    return MyOrder('ORDR123', OrderStatusEnum.packaging);
+    return MyOrder(
+      'ORDR123',
+      OrderStatusEnum.packaging,
+    );
   }
 
   MyOrder copyWith({

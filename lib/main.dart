@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_spectrum/enums/enums.dart';
-import 'package:flutter_spectrum/extensions/order_details_page.dart';
+import 'package:flutter_spectrum/utils/router.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Animate.restartOnHotReload = true;
-  runApp(const MainApp());
+  usePathUrlStrategy();
+  runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, ref) {
+    final router = ref.watch(routingProvider);
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(
-        initialIndex: 1,
-      ),
+      routerConfig: router,
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xff005c9a),
@@ -33,38 +34,43 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends HookWidget {
-  const HomeScreen({super.key, this.initialIndex = 0});
-  final int initialIndex;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    super.key,
+    required this.navigationShell,
+  });
+  static const String routeName = 'home';
+  static const String routeLocation = '/$routeName';
+
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _goBranch(int index) {
+    widget.navigationShell.goBranch(
+      index,
+      initialLocation: index == widget.navigationShell.currentIndex,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeColors = Theme.of(context).colorScheme;
-    final currentIndex = useState(initialIndex);
-    final pageController = usePageController(initialPage: initialIndex);
+    //final currentIndex = useState(widget.initialIndex);
+    //final pageController = usePageController(initialPage: widget.initialIndex);
     return Scaffold(
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        onPageChanged: (value) {
-          currentIndex.value = value;
-        },
-        children: const [
-          Enums(),
-          OrderDetailsPage(),
-        ],
-      ),
+      key: scaffoldKey,
+      body: widget.navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex.value,
+        currentIndex: widget.navigationShell.currentIndex,
         selectedItemColor: themeColors.primary,
         unselectedItemColor: Colors.blueGrey[600],
-        onTap: (value) {
-          pageController.animateToPage(
-            value,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.linear,
-          );
-        },
+        onTap: _goBranch,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
