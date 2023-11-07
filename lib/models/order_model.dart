@@ -1,7 +1,7 @@
 import 'package:flutter_spectrum/models/order_item.dart';
 import 'package:flutter_spectrum/models/order_status_model.dart';
 
-class Order {
+class OrderModel {
   final String orderId;
   final OrderStatus status;
   final DateTime updatedAt;
@@ -11,7 +11,7 @@ class Order {
   final double total;
   final String address;
 
-  Order({
+  OrderModel({
     required this.orderId,
     required this.status,
     required this.updatedAt,
@@ -22,8 +22,8 @@ class Order {
     required this.address,
   });
 
-  static Order get order {
-    return Order(
+  static OrderModel get order {
+    return OrderModel(
       orderId: 'ORDR123',
       status: OrderStatus(
         title: 'Packaging',
