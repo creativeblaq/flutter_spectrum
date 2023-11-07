@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spectrum/enums/enums.dart';
-import 'package:flutter_spectrum/enums/order_tracking_enum.dart';
+import 'package:flutter_spectrum/constructors.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,7 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ShowResult(),
+      home: const Constructors(),
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xff005c9a),
