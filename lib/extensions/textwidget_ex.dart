@@ -1,5 +1,33 @@
 import 'package:flutter/material.dart';
 
+/// An extension on the [Text] widget to provide default styling.
+///
+/// This extension adds utility methods to the [Text] widget,
+/// allowing for easy customization of text styles and alignment.
+///
+/// Methods:
+/// - `_withDefaultStyle`: Applies default styling to the text,
+///   with an optional [TextStyle] to merge with the default.
+/// - `headLrg`: Styled text with a large header size and bold weight.
+/// - `headMed`: Styled text with a medium header size and semi-bold weight.
+/// - `headSm`: Styled text with a small header size and bold weight.
+/// - `body`: Styled text with a normal body size.
+/// - `bodySm`: Styled text with a small body size.
+/// - `weight`: Sets the weight of the text to the provided [FontWeight].
+/// - `_withAlignment`: Aligns the text based on the given [TextAlign].
+/// - `alignLeft`: Aligns text to the left.
+/// - `alignRight`: Aligns text to the right.
+/// - `alignCenter`: Centers the text.
+/// - `alignJustify`: Justifies the text.
+/// - `alignStart`: Aligns the text at the start of the line.
+/// - `alignEnd`: Aligns the text at the end of the line.
+///
+/// Example usage:
+/// Text('Hello World').headLrg // Large, bold header text.
+/// Text('Hello World').body // Normal body text.
+/// Text('Hello World').weight(FontWeight.w500) // Medium weight text.
+/// Text('Hello World').alignCenter // Center-aligned text.
+
 extension TextEx on Text {
   //Default style
   Text _withDefaultStyle([TextStyle? newStyle]) {
