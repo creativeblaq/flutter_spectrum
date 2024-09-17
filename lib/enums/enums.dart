@@ -12,10 +12,11 @@ class Enums extends StatefulWidget {
 }
 
 class _EnumsState extends State<Enums> {
+  MyOrder order = MyOrder.order.copyWith(status: OrderStatusEnum.processing);
+
   @override
   Widget build(BuildContext context) {
     final themeColors = Theme.of(context).colorScheme;
-    MyOrder order = MyOrder.order.copyWith(status: OrderStatusEnum.delivered);
     return Scaffold(
       backgroundColor: themeColors.background,
       appBar: AppBar(
@@ -42,16 +43,26 @@ class _EnumsState extends State<Enums> {
         ),
         children: [
           ...OrderStatusEnum.values
-              .mapIndexed(
-                (i, e) => OrderStatusItemView(
-                  color: e.color,
-                  title: e.title,
-                  subtitle: e.description,
-                  icon: e.icon,
-                  showLine: i < OrderStatusEnum.values.length - 1,
-                  isActive: OrderStatusEnum.values.indexOf(order.status) >= i,
-                ),
-              )
+              .mapIndexed((i, e) => OrderStatusItemView(
+                    color: e.color,
+                    title: e.title,
+                    subtitle: e.description,
+                    icon: e.icon,
+                    showLine: i < OrderStatusEnum.values.length - 1,
+                    isActive: OrderStatusEnum.values.indexOf(order.status) >= i,
+                    showButton: e == order.status,
+                    onTap: () {
+                      setState(() {
+                        if (i < OrderStatusEnum.values.length - 1) {
+                          final nextStatus = OrderStatusEnum.values[i + 1];
+                          order = order.copyWith(status: nextStatus);
+                        } else {
+                          order = order.copyWith(
+                              status: OrderStatusEnum.values.first);
+                        }
+                      });
+                    },
+                  ))
               .toList(),
           /*  OrderStatusItemView(
             color: OrderStatusEnum.processing.color,

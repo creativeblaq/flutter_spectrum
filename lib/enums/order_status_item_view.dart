@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spectrum/utils/utilities.dart';
 
 class OrderStatusItemView extends StatelessWidget {
-  const OrderStatusItemView(
-      {Key? key,
-      required this.color,
-      required this.title,
-      required this.subtitle,
-      required this.icon,
-      required this.showLine,
-      required this.isActive})
-      : super(key: key);
+  const OrderStatusItemView({
+    Key? key,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.showLine,
+    required this.isActive,
+    this.onTap,
+    required this.showButton,
+  }) : super(key: key);
   final Color color;
   final String title;
   final String subtitle;
   final IconData icon;
   final bool showLine;
   final bool isActive;
+  final bool showButton;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +82,20 @@ class OrderStatusItemView extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
-                  trailing: Icon(
+                  leading: Icon(
                     icon,
                     color: isActive ? color : Colors.grey,
+                  ),
+                  trailing: Visibility(
+                    visible: showButton && onTap != null,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color.withOpacity(0.3),
+                        foregroundColor: color,
+                      ),
+                      onPressed: onTap,
+                      child: const Text('Done'),
+                    ),
                   ),
                 ),
               ),
